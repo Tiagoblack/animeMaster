@@ -10,8 +10,8 @@ import SingIn from "../page/SingIn";
 
 export default () =>(
     <stacks.Navigator>
-        <stacks.Screen name="preload" component={Preload}/>
-        <stacks.Screen name="preload" component={SingUp}/>
-        <stacks.Screen name="preload" component={SingIn}/>
+        <stacks.Screen name="Preload" component={Preload}/>
+        <stacks.Screen name="SingUp" component={SingUp}/>
+        <stacks.Screen name="SingIn" component={SingIn}/>
     </stacks.Navigator>
 );

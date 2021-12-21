@@ -1,16 +1,14 @@
 import {persistStore, persistReducer} from 'redux-persist';
 import {createStore} from 'redux'
 import AsynaStorage from '@react-native-async-storage/async-storage'
-import Reducer from './stora';
+import Reducers from './stora';
 
-const persitedReducer =persistReducer({
+const persitedReducer = persistReducer({
     key:'root',
     storage:AsynaStorage,
     whitelist:['userReducer'],
-}, Reducer);
+}, Reducers);
 
-const store = createStore(persistReducer);
-const persistor = persistReducer(store)
-
-
+const store = createStore(persitedReducer);
+const persistor = persistStore(store)
 export {store, persistor}
