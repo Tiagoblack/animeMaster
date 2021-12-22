@@ -13,7 +13,6 @@ export default (state = initialState, action)=>{
         case  'set_email':
             return { ...state, email: action.payload.email}
         break;
-    
     }
     return state
 }

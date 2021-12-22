@@ -8,9 +8,18 @@ import SingUp from "../page/SingUp";
 import SingIn from "../page/SingIn";
 
 
+import {AppLoading} from 'expo'
+import {useFonts, Roboto_700Bold, Roboto_400Regular
+} from '@expo-google-fonts/roboto';
+
+
 export default () =>(
-    <stacks.Navigator>
-        <stacks.Screen name="Preload" component={Preload}/>
+    <stacks.Navigator
+        screenOptions={{
+            headerShown:false
+        }}    
+    >
+        <stacks.Screen name="Preload" component={Preload}/>        
         <stacks.Screen name="SingUp" component={SingUp}/>
         <stacks.Screen name="SingIn" component={SingIn}/>
     </stacks.Navigator>
