@@ -11,16 +11,19 @@ import SingIn from "../page/SingIn";
 import {AppLoading} from 'expo'
 import {useFonts, Roboto_700Bold, Roboto_400Regular
 } from '@expo-google-fonts/roboto';
+import HomeTab from "./HomeTab";
 
 
 export default () =>(
     <stacks.Navigator
         screenOptions={{
-            headerShown:false
+            headerShown:false,
+            gestureEnabled:false
         }}    
     >
         <stacks.Screen name="Preload" component={Preload}/>        
         <stacks.Screen name="SingUp" component={SingUp}/>
         <stacks.Screen name="SingIn" component={SingIn}/>
+        <stacks.Screen name="HomeTab" component={HomeTab}/>
     </stacks.Navigator>
 );

@@ -13,8 +13,9 @@ export const Container = styled.SafeAreaView`
 
 export const ContainerFormInput = styled(Animated.View)`
     width:100%;
-    height:500px
+    height:100%
     justify-content:center;
+    align-items:center;
 
 `;
 export const InputForm = styled.View`
@@ -53,7 +54,7 @@ export const ButtonSingUpText= styled.Text`
 
 export const ButtomMessage = styled.TouchableOpacity`
     width:100%;
-    height:50px;
+    height:60px;
     justify-content:center;
     align-items:center;
     flex-direction:row;

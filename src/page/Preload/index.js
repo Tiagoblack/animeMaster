@@ -9,8 +9,10 @@ const Preload = () => {
     const name = useSelector(state=> state.userReducer.name);
     const navigation = useNavigation();
     useEffect(()=>{
-        if (!name) {
-            navigation.navigate('SingIn');
+        if (name) {
+            navigation.navigate('HomeTab');
+        }else{
+            navigation.navigate('SingUp')
         }
     },[])
 
