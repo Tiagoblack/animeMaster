@@ -10,9 +10,9 @@ const Preload = () => {
     const navigation = useNavigation();
     useEffect(()=>{
         if (name) {
-            navigation.navigate('HomeTab');
+            navigation.reset({routes:[{name:'HomeTab'}]});
         }else{
-            navigation.navigate('SingUp')
+            navigation.reset({routes:[{name:'SingUp'}]});
         }
     },[])
 

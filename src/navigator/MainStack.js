@@ -12,6 +12,7 @@ import {AppLoading} from 'expo'
 import {useFonts, Roboto_700Bold, Roboto_400Regular
 } from '@expo-google-fonts/roboto';
 import HomeTab from "./HomeTab";
+import TabGenre from "../page/TabGenre";
 
 
 export default () =>(

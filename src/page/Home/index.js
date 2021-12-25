@@ -24,9 +24,22 @@ import ListTop from '../../components/ListTop';
 
 
 const home = () => {
+    const [fetchApi, setFetchApi] = useState([])
+    const base_url = 'https://api.jikan.moe/v3';
+    useEffect(( )=>{
+        const getAll = async()=>{
+            const req = await fetch(`${base_url}/anime/recommendations`);
+            const res = await req.json();
+            
+            setFetchApi(res);
+            console.log(fetchApi);
+        } 
 
+        getAll();
+    },[])
+    
+    const [arrRandonNumber,] = useState([])
     const scrollY = new Animated.Value(0);
-    const [arrRandonNumber] = useState([])
     const [req, setReq] = useState(api.getAll())
         let img=[
             {
@@ -36,20 +49,14 @@ const home = () => {
             {
                 img: require('../../assests/imag/122219.jpg'),
                 name:'Bleach'
-        },
-        {
-            img: require('../../assests/imag/564835.jpg'),
-            name:'One Pice',
-        },
-        
-        {
-            img:require('../../assests/imag/481903.png'),
-            name:'Poker Mon'
-        },
-        {
-            img:require('../../assests/imag/593476.png'),
-            name:'Dragon Ball Super'
-        }
+            },
+            
+            {
+                img:require('../../assests/imag/481903.png'),
+                name:'Poker Mon'
+            },
+
+         
         
     ]
     

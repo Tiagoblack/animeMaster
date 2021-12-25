@@ -1,33 +1,55 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import React, {useState} from 'react'
+import { StyleSheet, Text, View, ActivityIndicator } from 'react-native'
 import styled from 'styled-components/native';
 
 
 
 const Container = styled.TouchableOpacity`
-    background-color:red;
     height:200px;
     width:150px;
     z-index:9999
+    margin:10px;
 
 
 `;
 const TitleAnime = styled.Text`
     color:#fff;
+    font-weight:bold;
+    margin:5px;
+    text-align:center;
+    margin-top: ${props=> props.loading ? '20px': '0px'}
 `;
 const ImageAnime = styled.Image`
-    background-color:green;
+    border-radius:30px;
+    background-color:#434343;
+    height:100%;
+    width:100%;
+    display:${props => props.loading ? 'none': 'flex'}    
+
 `;
 
-const ListAnimeSearch = ({data}) => {
-    return (
-        <Container>
+const ListAnimeSearch = ({data, key}) => {
+
+    const [loading, setLoading] = useState(true);
+
+return (
+        <Container
+            key={key}        
+        >
+
+            {loading &&
+                <ActivityIndicator 
+                    color="#fff"   
+                    size={30}
+                />
+            }   
             <ImageAnime
-                source={{uri:data.image_url}}
-                resizeMode="cover"
+                onLoadEnd={()=>setLoading(false)}
+                source={{uri:data.image_url}} 
+                resizeMode="cover" 
+                loading={loading}
             />
-            <TitleAnime>{data.title}</TitleAnime>
-            <Text>lsdmsknkdsnçsad,asç</Text>
+            <TitleAnime numberOfLines={2}>{data.title}</TitleAnime>
         </Container>
     )
 }

@@ -74,7 +74,7 @@ export default({state, descriptors, navigation}) => {
                 <IconText style={{ opacity: state.index === 1? 1: 0.5}}>Search</IconText>
             </TabArea>
             <TabArea 
-                onPress={()=>handleStackNaviagtion("Favorites")}
+                onPress={()=>handleStackNaviagtion("Genro")}
                 >
                 <MaterialIcons 
                 name="favorite" 
@@ -82,7 +82,7 @@ export default({state, descriptors, navigation}) => {
                 color="white"
                 style={{ opacity: state.index === 2? 1: 0.5}}
                 />
-                <IconText style={{ opacity: state.index === 2? 1: 0.5}}>Favorites</IconText>
+                <IconText style={{ opacity: state.index === 2? 1: 0.5}}>Genre</IconText>
             </TabArea>
             <TabArea 
                 onPress={()=>handleStackNaviagtion("Profile")}

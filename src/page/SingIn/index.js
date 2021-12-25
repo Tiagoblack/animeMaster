@@ -71,7 +71,7 @@ const SingUp = () => {
                     password
                 }
             });
-            navigation.navigate('SingUp')
+            navigation.reset({routes:[{name:'HomeTab'}]});
         }else{
             alert('email ou nome inavalidos')
         }

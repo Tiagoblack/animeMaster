@@ -95,7 +95,7 @@ const SingUp = () => {
                     <ButtonSingUpText>Login</ButtonSingUpText>
                 </ButtonSingUp>
                 <ButtomMessage
-                    onPress={()=>navigation.navigate('SingIn')}
+                    onPress={()=>navigation.reset({routes:[{name:'HomeTab'}]})}
                 >
                     <ButtonMessageText>Não possui uma  conta?</ButtonMessageText>
                     <ButtonMessageText style={{fontWeight:'bold', color:'#eee'}}>Então cadastre-se</ButtonMessageText>
