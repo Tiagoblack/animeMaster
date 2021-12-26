@@ -23,7 +23,6 @@ const SingUp = () => {
     const translateX = new Animated.Value(-100);
     const opacity = new Animated.Value(0); 
     const[lookPassword, setLookPassword] = useState(true);
-
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -53,24 +52,9 @@ const SingUp = () => {
 
     const handleClickSingIn = ()=>{
         if (name && email && password) {
-            dispatch({
-                type:'set_name',
-                payload:{
-                    name
-                }
-            });
-            dispatch({
-                type:'set_email',
-                payload:{
-                    email
-                }
-            });
-            dispatch({
-                type:'set_password',
-                payload:{
-                    password
-                }
-            });
+            dispatch({type:'set_name',payload:{name}});
+            dispatch({type:'set_email',payload:{email}});
+            dispatch({type:'set_password',payload:{password}});
             navigation.reset({routes:[{name:'HomeTab'}]});
         }else{
             alert('email ou nome inavalidos')
@@ -91,7 +75,6 @@ const SingUp = () => {
                         }}                
                 >
                     <LottieView
-    
                         style={{height:100, width:200,}}
                         source={require('../../assests/profile.json')} 
                         autoPlay    

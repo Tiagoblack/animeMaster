@@ -19,13 +19,15 @@ const HomeTab = () => (
         initialRouteName='home'
         screenOptions={{
             headerShown:false,
+            tabBarHideOnKeyboard:true,
         }}    
+        
         tabBar={props=><CustomTabBar {...props}/>}
         
     >
         <TabBottom.Screen name='Home' component={Home}/>
         <TabBottom.Screen name='Search' component={Search}/>
-        <TabBottom.Screen name='Genro' component={Genre}/>
+        <TabBottom.Screen name='Genre' component={Genre}/>
         <TabBottom.Screen name='Profile' component={Profile}/>
         <TabBottom.Screen name='TabGenre' component={TabGenre}/>
     </TabBottom.Navigator>

@@ -23,7 +23,19 @@ const SingUp = () => {
     const opacity = new Animated.Value(0); 
     const[lookPassword, setLookPassword] = useState(true);
     const refAnimation = useRef(null).current;
-    const navigation = useNavigation()
+    const navigation = useNavigation();
+
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const handleClickHomeTab =()=>{
+        if (email && password) {
+            navigation.reset({routes:[{name:'HomeTab'}]})            
+        }else{
+            alert('email ou senhas invalidos')
+        }
+    }
+
+
     useEffect(()=>{
         Animated.parallel([
             Animated.spring(translateX, {
@@ -74,7 +86,9 @@ const SingUp = () => {
                     <Input
                         placeholderStyle={{fontFamily:'sans-serif', borderColor:'red'}}
                         placeholder="Digite seu email"
-                        placeholderTextColor="#fff"                    
+                        placeholderTextColor="#fff"   
+                        onChangeText={t=>setName(t)}
+                        value={name}         
                     />
                     <Ionicons name="person" size={26} color="#fff" />            
                 </InputForm>
@@ -82,20 +96,22 @@ const SingUp = () => {
                     <Input
                         placeholder="Digite sua senha"
                         placeholderTextColor="#fff"
-                        secureTextEntry={lookPassword ? true:false}                  
+                        secureTextEntry={lookPassword ? true:false}
+                        onChangeText={t=>setEame(t)}
+                        value={email}                          
                     />
                     <Entypo onPress={()=>setLookPassword(!lookPassword)} 
                         name={lookPassword?'eye': 'eye-with-line'} 
                         size={26} 
                         color="#fff"/>                    
                 </InputForm>
-                <ButtonSingUp
-                    onPress={()=>{}}                
+                <ButtonSingUp                
+                    onPress={handleClickHomeTab}
                 >
                     <ButtonSingUpText>Login</ButtonSingUpText>
                 </ButtonSingUp>
                 <ButtomMessage
-                    onPress={()=>navigation.reset({routes:[{name:'HomeTab'}]})}
+                    onPress={()=>navigation.navigate('SingIn')}
                 >
                     <ButtonMessageText>Não possui uma  conta?</ButtonMessageText>
                     <ButtonMessageText style={{fontWeight:'bold', color:'#eee'}}>Então cadastre-se</ButtonMessageText>

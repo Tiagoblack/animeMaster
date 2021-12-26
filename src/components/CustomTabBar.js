@@ -2,6 +2,8 @@ import React, {useRef, useEffect} from'react'
 import { StyleSheet, Text, View, Animated } from 'react-native'
 import styled from 'styled-components/native';
 
+import { useSelector } from 'react-redux';
+
 
 
 import { Entypo, FontAwesome, Ionicons, MaterialIcons} from '@expo/vector-icons';
@@ -28,9 +30,17 @@ const TabArea = styled.TouchableOpacity`
     justify-content:center;
     align-items:center; 
 `;
-
-const IconText = styled.Text`
+    
+    const IconText = styled.Text`
     color:#fff;
+    
+`;
+    
+    const ImageProfile = styled.Image`
+    height:30px;
+    width:30px;
+    background-color:red;
+    border-radius:30px;
 
 `;
 
@@ -44,7 +54,7 @@ export default({state, descriptors, navigation}) => {
     const handleStackNaviagtion = (stackName)=>{
         navigation.navigate(stackName);
     }
-
+    const {img} = useSelector(state=>state.userReducer)
 
     return (    
        <Container>
@@ -74,7 +84,7 @@ export default({state, descriptors, navigation}) => {
                 <IconText style={{ opacity: state.index === 1? 1: 0.5}}>Search</IconText>
             </TabArea>
             <TabArea 
-                onPress={()=>handleStackNaviagtion("Genro")}
+                onPress={()=>handleStackNaviagtion("Genre")}
                 >
                 <MaterialIcons 
                 name="favorite" 
@@ -87,12 +97,18 @@ export default({state, descriptors, navigation}) => {
             <TabArea 
                 onPress={()=>handleStackNaviagtion("Profile")}
                 >
+                    {img ==null?
                    <Ionicons 
-                    name="person-circle" 
-                    size={24} 
-                    color="white" 
-                    style={{ opacity: state.index === 3? 1: 0.5}}
-                />
+                        name="person-circle" 
+                        size={24} 
+                        color="white" 
+                        style={{ opacity: state.index === 3? 1: 0.5}}
+                    />:
+                    <ImageProfile 
+                        source={{uri:img}}
+                        resizeMode="cover"
+                    />
+                    }
                 <IconText style={{ opacity: state.index === 3? 1: 0.5}}>Profile</IconText>
             </TabArea>
        </Container> 

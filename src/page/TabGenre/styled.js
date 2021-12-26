@@ -16,7 +16,7 @@ export const ContainerFlalist = styled.View`
 export const ButtonGoBack= styled.View`
     height:60px;
     width:100%;
-    background-color:#434343;
+    background-color:transparent;
     justify-content:center;
     align-items:center;
     border-radius:10px;
@@ -27,6 +27,7 @@ export const ButtonGoBackText = styled.Text`
     color:#fff;
     text-transform:uppercase;
     font-weight:bold;
+
 
 `;
 

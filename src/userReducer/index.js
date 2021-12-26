@@ -2,7 +2,7 @@ const initialState = {
     name:'',
     email:'',
     password:'',
-    favorites:[]
+    img:null
 }
 
 export default (state = initialState, action)=>{
@@ -17,6 +17,10 @@ export default (state = initialState, action)=>{
         case  'set_password':
             return { ...state, password: action.payload.password}
         break;
+        case  'set_image':
+            return { ...state, img: action.payload.img}
+        break;
+
     }
     return state
 }

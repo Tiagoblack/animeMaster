@@ -106,8 +106,8 @@ const home = () => {
                 <AnimeContainer                
                     style={{
                         transform: [{translateY:scrollY.interpolate({
-                        inputRange:[0, 150],
-                        outputRange:[0, -150],
+                        inputRange:[0, 180],
+                        outputRange:[0, -180],
                         extrapolate:'clamp'
                     })}]}}
                 >
