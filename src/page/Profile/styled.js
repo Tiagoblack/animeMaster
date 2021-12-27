@@ -32,7 +32,7 @@ export const TextName = styled.Text`
 
 `;
 
-export const TextWecome = styled.Text`
+export const TextWecome = styled(Animated.Text)`
     margin-top:10px;
     color:#fff;
     font-size:16px;
@@ -42,11 +42,10 @@ export const TextWecome = styled.Text`
 
 
 
-export const ContainerImageProfile = styled.View`
+export const ContainerImageProfile = styled(Animated.View)`
     height:170px;
     width:170px;
     border-radius:100px;
-
 
 `;
 
@@ -99,13 +98,13 @@ export const Input = styled.TextInput`
 
 export const ButtonEdit = styled.TouchableOpacity`
     width:100%;
-    height50px;
+    height0px;
     justify-content:center;
     align-items:center;
     margin-top: 20px;
     border-radius:20px;
     background-color:#434343;
-    padding:10px 15px;
+    padding:5px 12px;
 `;
 export const ButtonEditText = styled.Text`
     color:#fff;

@@ -1,6 +1,6 @@
 import React,{useEffect, useState, useRef} from 'react'
 import { LinearGradient } from 'expo-linear-gradient';
-import { Animated, StyleSheet, Text, View } from 'react-native';
+import { Animated, Keyboard } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
 import { useNavigation} from '@react-navigation/native'
@@ -26,9 +26,10 @@ import {
 
 
 const Profile = () => {
+    const aniHeight = useRef(new Animated.Value(170)).current;
+    const aniWidth = useRef(new Animated.Value(170)).current;
     const Bheight = new Animated.Value(0);
-    const opacity = new Animated.Value(0)
-    const [image, setImage] = useState(null);
+    const opacity = new Animated.Value(0);
     const dispatch = useDispatch();
     const img = useSelector(state=> state.userReducer.img);
     const name = useSelector(state=> state.userReducer.name);
@@ -36,15 +37,88 @@ const Profile = () => {
     const [editName, setEditName] = useState('');
     const [editEmail, setEditEmail] = useState('');
     const [editPassword, setEditPassword] = useState('');
+    const [result, setResult] = useState(null)
 
     const navigation = useNavigation();
+    const pickImage = async () => {
+        // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 1,
+        });
+        if (!result.cancelled ) {
+            dispatch({type:'set_image', payload:{img:result.uri}});
+        }
+
+        
+        
+    };
+    useEffect(()=>{
+        const KeyboardEventHideListener = Keyboard.addListener('keyboardDidHide', keyboardDidHide);
+        const KeyboardEventShowListener = Keyboard.addListener('keyboardDidShow', keyboardDidShow);
+    },[]);
 
     const handleClickEditProfile =()=>{
-        dispatch({type:'set_name', payload:{name:editName}});
-        dispatch({type:'set_email', payload:{email:editEmail}});
-        dispatch({type:'set_password', payload:{password:editPassword}});
+    dispatch({type:'set_name', payload:{name:editName}});
+    dispatch({type:'set_email', payload:{email:editEmail}});
+    dispatch({type:'set_password', payload:{password:editPassword}});
 
     };
+    
+
+    function keyboardDidHide(){
+        Animated.parallel([
+            Animated.timing(Bheight,{
+                toValue:300,
+                duration:500,
+                useNativeDriver:false
+            }).start(),
+            Animated.timing(aniWidth,{
+                toValue:170,
+                duration:500,
+                useNativeDriver:false
+            }).start(),
+            Animated.timing(aniHeight,{
+                toValue:170,
+                duration:500,
+                useNativeDriver:false
+            }).start(),
+            Animated.timing(opacity,{
+                toValue: aniHeight > 85 ?0: 1,
+                duration:500,
+                useNativeDriver:false
+            }).start()
+          
+
+        ])
+    }
+    function keyboardDidShow (){
+        Animated.parallel([
+
+            Animated.timing(Bheight,{
+                toValue:100,
+                duration:500,
+                useNativeDriver:false
+            }).start(),
+            Animated.timing(aniWidth,{
+                toValue:85,
+                duration:500,
+                useNativeDriver:false
+            }).start(),
+            Animated.timing(aniHeight,{
+                toValue:85,
+                duration:500,
+                useNativeDriver:false
+            }).start(),
+            Animated.timing(opacity,{
+                toValue: aniHeight > 85 ?1: 0,
+                duration:500,
+                useNativeDriver:false
+            }).start()
+        ])
+    }
     const handleClickResertProfile = ()=>{
         dispatch({type:'set_name', payload:{name:''}});
         dispatch({type:'set_email', payload:{email:''}});
@@ -52,6 +126,8 @@ const Profile = () => {
         dispatch({type:'set_image', payload:{img:null}});
         navigation.reset({routes:[{name:'Preload'}]})
     }
+    
+
     useEffect(()=>{
         Animated.parallel([
             Animated.spring(Bheight,{
@@ -67,22 +143,11 @@ const Profile = () => {
                 useNativeDriver:false,
 
             }).start()
-
+            
         ])
-    },[])
-    const pickImage = async () => {
-        // No permissions request is necessary for launching the image library
-        let result = await ImagePicker.launchImageLibraryAsync({
-          mediaTypes: ImagePicker.MediaTypeOptions.All,
-          allowsEditing: true,
-          aspect: [4, 3],
-          quality: 1,
-        });
-        dispatch({type:'set_image', payload:{img:image}});
-        if (!result.cancelled) {
-          setImage(result.uri);
-        }
-      };
+    },[]);
+
+    console.log(Bheight)
 return (
     <Container>
         <LinearGradient 
@@ -95,21 +160,28 @@ return (
                     shadowColor:'#eee',
                     height:Bheight
                 }}>   
-                <ContainerImageProfile>
-                    { img == null?
+                <ContainerImageProfile
+                    style={{height: aniWidth, width:aniWidth}}                
+                >
+                    { img === null?
                     <ImageProfile
                         source={require('../../assests/imag/placeholder.png')}
                         resizeMode="cover"                        
                         />:
-                        <ImageProfileMedia
-                        source={{uri:img}}
-                        resizeMode="cover"                        
+                        <ImageProfile
+                            source={{uri:img}}
+                            resizeMode="cover" 
                         /> 
                     }
-                    <ContainerBagde onPress={pickImage}>
+                    <ContainerBagde 
+                        onPress={()=>pickImage()}
+                        aniStyle={aniHeight}
+                    >
                         <BagdeProfile>+</BagdeProfile>
                     </ContainerBagde>    
-                    <TextWecome>Óla,  <TextName>{newName}</TextName>, seja bem-vindo</TextWecome>   
+                    <TextWecome
+                       style={{opacity}}
+                    >Óla,  <TextName>{newName}</TextName>, seja bem-vindo</TextWecome>   
                 </ContainerImageProfile>
             </ContainerProfile>
             <ContentProfile>
